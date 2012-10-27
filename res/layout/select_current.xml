@@ -1,26 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayoutIntro"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <TextView
+        android:id="@+id/textStatusInternet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/intro_text"
-        tools:context=".Intro" />
+        android:text="Internet Status:" />
 
     <TextView
-        android:id="@+id/textStatusInternet"
+        android:id="@+id/textStatusLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location Status: " />
+
+    <TextView
+        android:id="@+id/textLatCurrent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" />
 
-    <Button
-        android:id="@+id/buttonCont"
+    <TextView
+        android:id="@+id/textLngCurrent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Continue" />
+        android:text="TextView" />
 
 </LinearLayout>
