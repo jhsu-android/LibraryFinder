@@ -24,10 +24,9 @@ public class Intro extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro);
         addContinueButton();
-        
+                
+        // Check for Internet connection
         ConnectionDetector1 = new ConnectionDetector(getApplicationContext());
-        
-		// Check if Internet present
 		isInternetPresent = ConnectionDetector1.isConnectingToInternet();
 		TextView1 = (TextView) findViewById(R.id.textStatusInternet);
 		if (!isInternetPresent) {

@@ -5,27 +5,39 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textStatusInternet"
+        android:id="@+id/textStatusInternetCurrent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Internet Status:" />
+        android:text="Internet Status: not working" />
+
+    <TextView
+        android:id="@+id/textStatusLocationGPS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GPS Status: not working" />
+
+    <TextView
+        android:id="@+id/textStatusLocationNetwork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Network Location Status: not working" />
 
     <TextView
         android:id="@+id/textStatusLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Location Status: " />
+        android:text="@string/warning_nolocation" />
 
     <TextView
         android:id="@+id/textLatCurrent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Latitude: N/A" />
 
     <TextView
         android:id="@+id/textLngCurrent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Longitude: N/A" />
 
 </LinearLayout>

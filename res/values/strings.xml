@@ -7,6 +7,21 @@
         near an alternate location of your choice.
         \n\nPLEASE NOTE that this app requires an Internet connection.
     </string>
+    <string name="warning_nolocation">
+      	\nLocation Status: not working
+    	\nYour current location cannot be determined.  
+    	You need to change your location setting to use 
+    	wireless networks to determine your location or 
+    	to use GPS.  Please note that certain locations 
+    	lack access to a strong GPS signal.\n
+    </string>
+    <string name="warning_noaddress">
+        The coordinates for the location you entered could not be found. 
+    </string>
+    <string name="select_alt_instr">
+        Several addresses were found for the location you entered.    
+        Please select one.\n\n
+    </string>
     <string name="menu_settings">Settings</string>
 
 </resources>
