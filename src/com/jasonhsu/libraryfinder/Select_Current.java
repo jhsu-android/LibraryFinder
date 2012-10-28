@@ -5,12 +5,18 @@ package com.jasonhsu.libraryfinder;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.widget.LinearLayout;
+import android.os.Handler;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class Select_Current extends Activity {
@@ -37,6 +43,9 @@ public class Select_Current extends Activity {
 
 	// For showing current location
 	TextView TextViewLat, TextViewLong;
+	
+	// For moving on to ShowMap.java
+	Button ButtonContinue; // Initializes button
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,12 +92,13 @@ public class Select_Current extends Activity {
 		provider = LocationManager1.getBestProvider(Criteria1, true);
 		if (gps_enabled) {
 			LocationManager1.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, LocationListener1);
-			// Go to map
+			addContinueButton();
 		}
-		if (gps_enabled & network_enabled) {
+		if (!gps_enabled & network_enabled) {
 			LocationManager1.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, LocationListener1);
-			// Go to map
+			addContinueButton();
 		}
+		
     }
     
     class MyLocationListener implements LocationListener {
@@ -124,4 +134,20 @@ public class Select_Current extends Activity {
 			// TODO Auto-generated method stub
 		}
     }
+    
+    public void addContinueButton () {
+    	final Context Context1 = this;
+    	ButtonContinue = (Button) findViewById(R.id.buttonSelectCurrent);
+    	ButtonContinue.setOnClickListener(new OnClickListener() {
+    		@Override
+    		public void onClick(View arg0) {
+    			DataSave.LatIntStr = LatStr1;
+    			DataSave.LongIntStr = LongStr1;
+    			
+    			Intent Intent1 = new Intent(Context1, ShowMap.class);
+    			startActivity(Intent1);
+    		}
+    	});
+    }
+
 }

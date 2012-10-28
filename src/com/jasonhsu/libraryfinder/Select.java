@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 
 public class Select extends Activity {
+	EditText text_radius;
+	double radius_double;
 	boolean SelectedLocationCurrent;
 	Button ButtonSubmit; // Initializes button
 	
@@ -28,6 +30,8 @@ public class Select extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				RadioButton ButtonCurrent = (RadioButton) findViewById(R.id.radioCurrent);
+				EditText text_radius = (EditText) findViewById (R.id.editRadius);
+				radius_double = Double.parseDouble(text_radius.getText().toString());
 				
 				if (ButtonCurrent.isChecked()) {
 				    Intent Intent1 = new Intent(Context1, Select_Current.class);
@@ -37,6 +41,7 @@ public class Select extends Activity {
 					EditText EditTextLocation = (EditText)findViewById(R.id.editAddress);
 					String LocationEntered = EditTextLocation.getText().toString();
 					DataSave.LocationAlt = LocationEntered;
+					DataSave.RadiusEntered = Double.toString(radius_double);
 					Intent Intent1 = new Intent(Context1, Select_Alt.class);
 	                startActivity(Intent1);
 				}
