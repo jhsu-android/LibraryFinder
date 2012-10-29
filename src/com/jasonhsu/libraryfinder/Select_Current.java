@@ -90,12 +90,12 @@ public class Select_Current extends Activity {
 		Criteria Criteria1 = new Criteria();
 		Criteria1.setAccuracy(Criteria.ACCURACY_FINE);
 		provider = LocationManager1.getBestProvider(Criteria1, true);
+		if (network_enabled) {
+			LocationManager1.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, LocationListener1);
+			addContinueButton();;
+		}
 		if (gps_enabled) {
 			LocationManager1.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, LocationListener1);
-			addContinueButton();
-		}
-		if (!gps_enabled & network_enabled) {
-			LocationManager1.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, LocationListener1);
 			addContinueButton();
 		}
 		
