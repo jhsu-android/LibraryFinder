@@ -34,6 +34,7 @@ public class Select extends Activity {
 				radius_double = Double.parseDouble(text_radius.getText().toString());
 				
 				if (ButtonCurrent.isChecked()) {
+					DataSave.RadiusEntered = Double.toString(radius_double);
 				    Intent Intent1 = new Intent(Context1, Select_Current.class);
 	                startActivity(Intent1);   
 				}

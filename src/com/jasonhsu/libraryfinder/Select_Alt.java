@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -150,6 +151,7 @@ public class Select_Alt extends Activity {
                 R.layout.list_addresses,
                 new String[] { KEY_ADDRESS}, new int[] {
                         R.id.textViewAddress});
+				
 		ListView1.setAdapter(adapter);
 		
         if (list_length > 0) {
@@ -163,9 +165,15 @@ public class Select_Alt extends Activity {
 					long arg3) {
 				// TODO Auto-generated method stub
 				// Get value from selected list item
-				String reference = ((TextView) arg1.findViewById(R.id.listView1)).getText().toString();
+				String LatStr1 = ((TextView) arg1.findViewById(R.id.listView1)).getText().toString();
 				
-				// Intent
+				
+				
+				//DataSave.LatDoubleStr = LatStr1;
+    			//DataSave.LongDoubleStr = LongStr1;
+				
+				// Starting new intent
+                Intent Intent1 = new Intent(getApplicationContext(), ShowMap.class);
 			}
         	
         });

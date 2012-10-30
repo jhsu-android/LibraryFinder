@@ -39,7 +39,6 @@ public class Select_Current extends Activity {
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
 	double LatDouble1, LongDouble1;
 	String LatStr1, LongStr1;
-	int LatInt1, LongInt1;
 
 	// For showing current location
 	TextView TextViewLat, TextViewLong;
@@ -111,8 +110,6 @@ public class Select_Current extends Activity {
 			LongDouble1 = location.getLongitude();
 			LatStr1 = String.valueOf (LatDouble1);
 			LongStr1 = String.valueOf (LongDouble1);
-			LatInt1 = (int) LatDouble1 * (10^6);
-			LongInt1 = (int) LongDouble1 * (10^6);
 			TextViewLat = (TextView) findViewById (R.id.textLatCurrent);
 			TextViewLong = (TextView) findViewById (R.id.textLngCurrent);
 			TextViewLat.setText("Latitude: " + LatStr1 + " degrees");
@@ -141,8 +138,8 @@ public class Select_Current extends Activity {
     	ButtonContinue.setOnClickListener(new OnClickListener() {
     		@Override
     		public void onClick(View arg0) {
-    			DataSave.LatIntStr = LatStr1;
-    			DataSave.LongIntStr = LongStr1;
+    			DataSave.LatDoubleStr = LatStr1;
+    			DataSave.LongDoubleStr = LongStr1;
     			
     			Intent Intent1 = new Intent(Context1, ShowMap.class);
     			startActivity(Intent1);
