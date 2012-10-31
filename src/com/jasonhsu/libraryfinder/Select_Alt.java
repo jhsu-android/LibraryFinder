@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -78,6 +79,7 @@ public class Select_Alt extends Activity {
         // Get input data stream from the URL.
         try{
         	URI URI1 = new URI(url2.replace (' ', '+'));
+        	Log.i ("Select_Alt - URL", String.valueOf(URI1));
         	HttpClient HttpClient1 = new DefaultHttpClient();
         	HttpPost HttpPost1 = new HttpPost(URI1);
         	HttpResponse Response1 = HttpClient1.execute(HttpPost1);
@@ -103,7 +105,7 @@ public class Select_Alt extends Activity {
         	Log.e("Select_Alt", "Error converting result "+e.toString());
         }
 
-        Log.i ("CHECK 1", json_str);
+        Log.i ("Select_Alt", json_str);
         
         // Parse the data stream into a JSON object.  
         try {
@@ -142,42 +144,59 @@ public class Select_Alt extends Activity {
         	Log.e ("Select_Alt", "Failed to process JSONObject1");
         }
         
-        // Display possible address in ListView
-        ListView1 = (ListView) findViewById(R.id.listView1);
-        HashMap<String, String> HashMap1 = new HashMap<String, String>();
-        int list_length = ResultList.size();
+        Log.i ("Select_Alt", "Finished acquiring possible addresses");
         
-		ListAdapter adapter = new SimpleAdapter(Select_Alt.this, ResultList,
-                R.layout.list_addresses,
-                new String[] { KEY_ADDRESS}, new int[] {
-                        R.id.textViewAddress});
-				
-		ListView1.setAdapter(adapter);
-		
+        // Display all addresses found in ListView
+        // Based on example at
+        // http://www.javasrilankansupport.com/2012/05/android-listview-example-with-image-and.html
+        int list_length = ResultList.size();
         if (list_length > 0) {
         	TextViewInternet.setText(R.string.select_alt_instr);
         }
+    
+        
+        ArrayList<AddressDetails> address_details = GetPossibleAddresses ();
+        final ListView ListView1 = (ListView) findViewById(R.id.listView1);
+        
+        Log.i ("Select_Alt", "Just before ListView1.setAdapter");
+        ListView1.setAdapter(new AddressListBaseAdapter(this, address_details));
         
         ListView1.setOnItemClickListener(new OnItemClickListener() {
-
+        	
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+			public void onItemClick(AdapterView<?> arg0, View arg1, int i,
 					long arg3) {
 				// TODO Auto-generated method stub
-				// Get value from selected list item
-				String LatStr1 = ((TextView) arg1.findViewById(R.id.listView1)).getText().toString();
+				Object Object1 = ListView1.getItemAtPosition(i);
+				AddressDetails ObjectDetails = (AddressDetails)Object1;
+				DataSave.LatDoubleStr = ObjectDetails.getLatStr();
+				DataSave.LongDoubleStr = ObjectDetails.getLongStr();
 				
-				
-				
-				//DataSave.LatDoubleStr = LatStr1;
-    			//DataSave.LongDoubleStr = LongStr1;
-				
-				// Starting new intent
-                Intent Intent1 = new Intent(getApplicationContext(), ShowMap.class);
+			    Intent Intent1 = new Intent(getApplicationContext(), ShowMap.class);
+                startActivity(Intent1);  
 			}
         	
         });
      
+    }
+    
+    private ArrayList<AddressDetails> GetPossibleAddresses() {
+    	ArrayList<AddressDetails> AddressList = new ArrayList<AddressDetails>();
+    	HashMap<String, String> HashMap1 = new HashMap<String, String>();
+    	int list_length = ResultList.size();
+    	for (int i = 0; i < list_length; i++) {
+    		HashMap1 = ResultList.get(i);
+    		String Address = HashMap1.get(KEY_ADDRESS);
+    		String LatStr = HashMap1.get(KEY_LAT);
+    		String LngStr = HashMap1.get(KEY_LNG);
+    		AddressDetails AddressDetails1 = new AddressDetails ();
+    		AddressDetails1.setAddress(Address);
+    		AddressDetails1.setLatStr(LatStr);
+    		AddressDetails1.setLongStr(LngStr);
+    		AddressList.add(AddressDetails1);
+    	}
+    	
+    	return AddressList;
     }
     
 

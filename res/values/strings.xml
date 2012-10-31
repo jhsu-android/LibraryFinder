@@ -19,8 +19,7 @@
         The coordinates for the location you entered could not be found. 
     </string>
     <string name="select_alt_instr">
-        Several addresses were found for the location you entered.    
-        Please select one.\n\n
+        Please select your desired location.\n\n
     </string>
     <string name="menu_settings">Settings</string>
 
